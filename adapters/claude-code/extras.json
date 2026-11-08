@@ -1,0 +1,39 @@
+{
+  "marketplace": {
+    "name": "acli",
+    "version": "0.1.0",
+    "description": "Acli plugin marketplace: the dual-audience CLI contract, authoring skills, and reference CLI plugins.",
+    "owner": {
+      "name": "ZJZ0405"
+    }
+  },
+  "plugins": [
+    {
+      "name": "acli-toolkit",
+      "source": "./",
+      "description": "Design, scaffold, audit, and contract-test Acli-friendly CLIs that work for both humans and autonomous agents.",
+      "category": "development",
+      "keywords": ["cli", "agent", "contract", "testing", "design"]
+    }
+  ],
+  "manifests": {
+    "acli-toolkit": {
+      "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+      "name": "acli-toolkit",
+      "version": "0.1.0",
+      "description": "Design, scaffold, audit, and contract-test Acli-friendly CLIs that work for both humans and autonomous agents.",
+      "author": {
+        "name": "ZJZ0405"
+      },
+      "homepage": "https://github.com/ZJZ0405/Acli",
+      "repository": "https://github.com/ZJZ0405/Acli",
+      "keywords": ["cli", "agent", "contract", "testing", "design"],
+      "skills": [
+        "./.claude/skills/acli-design",
+        "./.claude/skills/acli-scaffold",
+        "./.claude/skills/acli-audit",
+        "./.claude/skills/acli-contract-test"
+      ]
+    }
+  }
+}

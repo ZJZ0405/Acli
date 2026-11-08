@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "acli",
+  "description": "Agent-agnostic registry of Acli-compatible CLI plugins. The registry is plain JSON; agent-specific packaging is an adapter.",
+  "homepage": "https://github.com/ZJZ0405/Acli",
+  "plugins": [
+    {
+      "id": "llmc",
+      "manifest": "plugins/llmc/plugin.json"
+    }
+  ]
+}

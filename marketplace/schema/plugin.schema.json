@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZJZ0405/Acli/marketplace/schema/plugin.schema.json",
+  "title": "Acli plugin manifest",
+  "description": "Agent-agnostic description of a CLI plugin. The plugin's own --help and schema command remain the interface authority; this manifest only records how to invoke them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "kind", "name", "version", "summary", "interface"],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "description": "Stable registry id."
+    },
+    "kind": {
+      "enum": ["cli"],
+      "description": "Plugin kind. v1 supports CLI plugins only."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+([-+][0-9A-Za-z.-]+)?$"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX identifier."
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri"
+    },
+    "publisher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "enum": ["linux", "macos", "wsl", "windows"]
+      },
+      "uniqueItems": true
+    },
+    "distributions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "enum": ["pypi", "npm", "binary", "source", "container"]
+          },
+          "package": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "path": {
+            "type": "string"
+          },
+          "entrypoint": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "interface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable",
+        "version_command",
+        "help_command",
+        "schema_command",
+        "schema_version",
+        "non_interactive"
+      ],
+      "properties": {
+        "executable": {
+          "type": "string"
+        },
+        "version_command": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "help_command": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema_command": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Use {file} where the CLI writes its schema."
+        },
+        "schema_version": {
+          "type": "string",
+          "description": "Value reported by the CLI's schema, not the marketplace schema."
+        },
+        "output_protocols": {
+          "type": "array",
+          "items": {
+            "enum": ["json", "ndjson", "text"]
+          },
+          "uniqueItems": true
+        },
+        "non_interactive": {
+          "type": "boolean"
+        },
+        "exit_codes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "enum": ["help", "guide", "both"],
+          "description": "help: rely on --help/schema only. guide: ship the portable guide. both: guide plus help."
+        },
+        "guide": {
+          "type": "string",
+          "description": "Path relative to the plugin directory."
+        },
+        "format": {
+          "const": "markdown"
+        },
+        "applies_to": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cli": {
+              "type": "string"
+            },
+            "interface": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "mode": {
+            "enum": ["guide", "both"]
+          }
+        },
+        "required": ["mode"]
+      },
+      "then": {
+        "required": ["guide"]
+      }
+    }
+  }
+}

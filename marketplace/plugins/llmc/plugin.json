@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "llmc",
+  "kind": "cli",
+  "name": "llmc",
+  "version": "0.1.0",
+  "summary": "Agent-friendly CLI for vLLM llm-compressor.",
+  "description": "Inspect models, validate or generate recipes, quantize, prune MoE experts, and verify compressed checkpoints without interactive prompts.",
+  "category": "machine-learning",
+  "keywords": ["llmc", "llm-compressor", "quantization", "pruning", "vllm", "compression"],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/ZJZ0405/Acli",
+  "repository": "https://github.com/ZJZ0405/Acli",
+  "publisher": {
+    "name": "ZJZ0405"
+  },
+  "platforms": ["linux", "macos", "wsl"],
+  "distributions": [
+    {
+      "type": "source",
+      "path": "src/llmc_cli",
+      "entrypoint": ["python3", "-m", "llmc_cli"],
+      "note": "Run from the repository root with PYTHONPATH=src."
+    }
+  ],
+  "interface": {
+    "executable": "llmc",
+    "version_command": ["llmc", "version", "--json"],
+    "help_command": ["llmc", "--help"],
+    "schema_command": ["llmc", "schema", "-o", "{file}"],
+    "schema_version": "llmc-agent-cli/1",
+    "output_protocols": ["json"],
+    "non_interactive": true
+  },
+  "usage": {
+    "mode": "guide",
+    "guide": "usage/llmc.md",
+    "format": "markdown",
+    "applies_to": {
+      "cli": ">=0.1.0 <0.2.0",
+      "interface": "llmc-agent-cli/1"
+    }
+  }
+}

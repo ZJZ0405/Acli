@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "acli",
+  "version": "0.1.0",
+  "description": "Acli plugin marketplace: the dual-audience CLI contract, authoring skills, and reference CLI plugins.",
+  "owner": {
+    "name": "ZJZ0405"
+  },
+  "plugins": [
+    {
+      "name": "llmc",
+      "source": "./plugins/llmc",
+      "description": "Agent-friendly CLI for vLLM llm-compressor.",
+      "category": "machine-learning",
+      "keywords": [
+        "llmc",
+        "llm-compressor",
+        "quantization",
+        "pruning",
+        "vllm",
+        "compression"
+      ]
+    },
+    {
+      "name": "acli-toolkit",
+      "source": "./",
+      "description": "Design, scaffold, audit, and contract-test Acli-friendly CLIs that work for both humans and autonomous agents.",
+      "category": "development",
+      "keywords": [
+        "cli",
+        "agent",
+        "contract",
+        "testing",
+        "design"
+      ]
+    }
+  ]
+}

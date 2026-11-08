@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZJZ0405/Acli/marketplace/schema/index.schema.json",
+  "title": "Acli marketplace index",
+  "description": "A registry index. It is data only; agent-specific packaging lives in an adapter.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "name", "plugins"],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "manifest"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$"
+          },
+          "manifest": {
+            "type": "string",
+            "description": "Path relative to this index."
+          }
+        }
+      }
+    }
+  }
+}
